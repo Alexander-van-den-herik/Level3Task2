@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -43,6 +44,7 @@ class PortalOverviewFragment : Fragment() {
         rv_portal_cards.adapter = portalAdapter
 
         createItemTouchHelper().attachToRecyclerView(rv_portal_cards)
+        observeAddReminderResult()
     }
 
     private fun portalClicked(portal: Portal) {
@@ -73,11 +75,12 @@ class PortalOverviewFragment : Fragment() {
         return ItemTouchHelper(callback)
     }
 
-//    private fun observeAddReminderResult() {
-//        setFragmentResultListener(PORTAL) { _, bundle ->
-//            bundle.getParcelable<Portal>(PORTAL)?.let {
-//                portals.add(it)
-//            } ?: Log.e("PortalCard", "No PortalCard received!")
-//        }
-//    }
+    private fun observeAddReminderResult() {
+        setFragmentResultListener(PORTAL) { _, bundle ->
+            bundle.getParcelable<Portal>(PORTAL)?.let {
+                portals.add(it)
+                portalAdapter.notifyDataSetChanged()
+            } ?: Log.e("PortalCard", "No PortalCard received!")
+        }
+    }
 }

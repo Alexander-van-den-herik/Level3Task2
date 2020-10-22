@@ -11,6 +11,8 @@ import androidx.navigation.findNavController
 
 import kotlinx.android.synthetic.main.activity_main.*
 
+const val PORTAL = "portal"
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
