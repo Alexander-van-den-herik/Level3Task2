@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun fabToggler() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id in arrayOf(R.id.FirstFragment)) {
+            if (destination.id  == R.id.FirstFragment) {
                 fab.show()
             } else {
                 fab.hide()
